@@ -10,8 +10,8 @@ export function BookCard({
   borrowing,
 }: {
   book: Book;
-  onBorrow?: (book: Book) => void;
-  borrowing?: boolean;
+  onBorrow?: ((book: Book) => void) | undefined;
+  borrowing?: boolean | undefined;
 }) {
   const available = book.available_copies > 0;
 
@@ -76,8 +76,8 @@ export function BookList({
   borrowingId,
 }: {
   books: Book[];
-  onBorrow?: (book: Book) => void;
-  borrowingId?: string | null;
+  onBorrow?: ((book: Book) => void) | undefined;
+  borrowingId?: string | null | undefined;
 }) {
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">

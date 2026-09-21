@@ -34,21 +34,21 @@ function RegisterPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const next: Record<string, string> = {};
-    if (values.fullName.trim().length < 2) next.fullName = "Please enter your full name.";
-    if (!/^\S+@\S+\.\S+$/.test(values.email.trim())) next.email = "Enter a valid email address.";
-    if (values.password.length < 6) next.password = "Password must be at least 6 characters.";
-    if (values.password !== values.confirm) next.confirm = "Passwords do not match.";
+    if (values['fullName'].trim().length < 2) next['fullName'] = "Please enter your full name.";
+    if (!/^\S+@\S+\.\S+$/.test(values['email'].trim())) next['email'] = "Enter a valid email address.";
+    if (values['password'].length < 6) next['password'] = "Password must be at least 6 characters.";
+    if (values['password'] !== values['confirm']) next['confirm'] = "Passwords do not match.";
     setErrors(next);
     setFormError(null);
     if (Object.keys(next).length > 0) return;
 
     setSubmitting(true);
     const { data, error } = await supabase.auth.signUp({
-      email: values.email.trim(),
-      password: values.password,
+      email: values['email'].trim(),
+      password: values['password'],
       options: {
         emailRedirectTo: window.location.origin,
-        data: { full_name: values.fullName.trim() },
+        data: { full_name: values['fullName'].trim() },
       },
     });
     setSubmitting(false);
@@ -70,7 +70,7 @@ function RegisterPage() {
       <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-6 text-center shadow-sm">
         <h1 className="font-display text-2xl font-semibold">Check your email</h1>
         <p className="mt-3 text-sm text-muted-foreground">
-          We sent a confirmation link to <span className="font-medium">{values.email}</span>. Click it to
+          We sent a confirmation link to <span className="font-medium">{values['email']}</span>. Click it to
           activate your account, then log in.
         </p>
         <Button asChild className="mt-6">
@@ -95,14 +95,14 @@ function RegisterPage() {
           <Label htmlFor="fullName">Full name</Label>
           <Input
             id="fullName"
-            value={values.fullName}
+            value={values['fullName']}
             maxLength={100}
             autoComplete="name"
             onChange={(e) => set("fullName", e.target.value)}
           />
-          {errors.fullName ? (
+          {errors['fullName'] ? (
             <p className="text-xs text-destructive" role="alert">
-              {errors.fullName}
+              {errors['fullName']}
             </p>
           ) : null}
         </div>
@@ -113,12 +113,12 @@ function RegisterPage() {
             id="email"
             type="email"
             autoComplete="email"
-            value={values.email}
+            value={values['email']}
             onChange={(e) => set("email", e.target.value)}
           />
-          {errors.email ? (
+          {errors['email'] ? (
             <p className="text-xs text-destructive" role="alert">
-              {errors.email}
+              {errors['email']}
             </p>
           ) : null}
         </div>
@@ -129,12 +129,12 @@ function RegisterPage() {
             id="password"
             type="password"
             autoComplete="new-password"
-            value={values.password}
+            value={values['password']}
             onChange={(e) => set("password", e.target.value)}
           />
-          {errors.password ? (
+          {errors['password'] ? (
             <p className="text-xs text-destructive" role="alert">
-              {errors.password}
+              {errors['password']}
             </p>
           ) : null}
         </div>
@@ -145,12 +145,12 @@ function RegisterPage() {
             id="confirm"
             type="password"
             autoComplete="new-password"
-            value={values.confirm}
+            value={values['confirm']}
             onChange={(e) => set("confirm", e.target.value)}
           />
-          {errors.confirm ? (
+          {errors['confirm'] ? (
             <p className="text-xs text-destructive" role="alert">
-              {errors.confirm}
+              {errors['confirm']}
             </p>
           ) : null}
         </div>

@@ -30,8 +30,8 @@ function LoginPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const next: Record<string, string> = {};
-    if (!/^\S+@\S+\.\S+$/.test(email.trim())) next.email = "Enter a valid email address.";
-    if (password.length < 6) next.password = "Password must be at least 6 characters.";
+    if (!/^\S+@\S+\.\S+$/.test(email.trim())) next['email'] = "Enter a valid email address.";
+    if (password.length < 6) next['password'] = "Password must be at least 6 characters.";
     setErrors(next);
     setFormError(null);
     if (Object.keys(next).length > 0) return;
@@ -71,9 +71,9 @@ function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          {errors.email ? (
+          {errors['email'] ? (
             <p className="text-xs text-destructive" role="alert">
-              {errors.email}
+              {errors['email']}
             </p>
           ) : null}
         </div>
@@ -87,9 +87,9 @@ function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {errors.password ? (
+          {errors['password'] ? (
             <p className="text-xs text-destructive" role="alert">
-              {errors.password}
+              {errors['password']}
             </p>
           ) : null}
         </div>
