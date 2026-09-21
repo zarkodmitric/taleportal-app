@@ -41,7 +41,7 @@ export function EmptyState({
   );
 }
 
-export function PageHeader({ title, subtitle }: { title: string; subtitle?: string }) {
+export function PageHeader({ title, subtitle }: { title: string; subtitle?: string | undefined }) {
   return (
     <header className="mb-8">
       <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h1>
